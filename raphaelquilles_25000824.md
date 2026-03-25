@@ -63,3 +63,25 @@ graph LR
     GE --> UC09(UC09: Gerar Relatório)
     UC09 -.->|include| UC03
     GE --> UC10(UC10: Manter Medicamento)
+---
+
+## 6. Documentação dos Casos de Uso
+
+### UC01 — Efetuar Venda
+* **Ator(es):** Operador de Caixa
+* **Descrição:** Registrar produtos e finalizar o pagamento do cliente.
+* **Pré-condições:** Caixa aberto e Operador logado.
+* **Pós-condições:** Venda concluída e estoque baixado.
+* **Fluxo Principal:** 1. Iniciar venda; 2. Escanear produtos; 3. Validar estoque; 4. Selecionar pagamento; 5. Emitir cupom.
+* **Fluxo Alternativo:** FA01: Item controlado exige receita médica (UC04).
+* **Diagrama de Atividades:**
+```mermaid
+graph TD
+    Start((Início)) --> Scan[Informar Produto]
+    Scan --> Stock{Tem estoque?}
+    Stock -- Não --> Error[Alerta estoque insuficiente] --> Scan
+    Stock -- Sim --> Add[Adicionar ao Carrinho]
+    Add --> More{Mais itens?}
+    More -- Sim --> Scan
+    More -- Não --> Pay[Processar Pagamento]
+    Pay --> End((Fim))
