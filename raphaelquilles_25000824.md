@@ -8,25 +8,23 @@
 ---
 
 ## 1. Definição do MVP
-Meu MVP cobre o processo de venda desde a identificação/cadastro do cliente até a emissão do comprovante, incluindo o tratamento de medicamentos controlados e a baixa automática de estoque.
+Para este trabalho, escolhi focar no dia a dia do balcão da farmácia. Foquei no que é mais importante: passar o produto, baixar o estoque e não ter problema com receita de remédio controlado.
 
-* **O que está dentro do MVP:** Cadastro de clientes e medicamentos, venda de produtos (comuns e controlados), registro de receitas médicas e fechamento de caixa.
-* **O que está fora do MVP:** Gestão de compras com fornecedores, financeiro avançado (DRE/Fluxo de Caixa) e gestão de funcionários (folha de pagamento).
-* **Por que fiz essas escolhas:** Foquei na operação principal da farmácia para garantir que o fluxo de vendas e a conformidade legal (Anvisa) funcionem perfeitamente antes de expandir o sistema para módulos administrativos.
-
+* **O que o sistema faz:** Cadastro de clientes, busca de remédios, venda (comum e controlada), baixa automática no estoque e fechamento do caixa.
+* **O que ficou de fora:** Compras com fornecedores, gestão de funcionários e a parte financeira complexa de contas a pagar/receber.
+* **Por que essas escolhas:** Foquei no que é mais crítico: vender certo, não deixar o estoque furar e garantir que nenhum remédio controlado saia sem os dados da receita médica.
 ---
 
 ## 2. Regras de Negócio (RN)
-* **RN01 — Retenção de Receita:** Medicamentos de uso controlado só podem ser vendidos se os dados da receita (CRM e Médico) forem registrados no sistema.
-* **RN02 — Desconto Fidelidade:** Clientes cadastrados ganham 10% de desconto automático em medicamentos genéricos.
-* **RN03 — Validade do Produto:** O sistema deve impedir a inclusão de itens com data de validade vencida na venda.
-* **RN04 — Cancelamento de Venda:** Apenas gerentes podem cancelar vendas, e o prazo máximo é de 15 minutos após a emissão do cupom.
-* **RN05 — Estoque Crítico:** O sistema deve alertar o operador de caixa visualmente quando um item atingir 5 unidades ou menos em estoque.
-
+* **RN01 — Trava de Receita:** Remédio de tarja preta ou vermelha só sai do sistema se o operador digitar o CRM do médico.
+* **RN02 — Desconto no CPF:** Se o cliente tiver cadastro, o sistema já aplica 10% de desconto automático em qualquer genérico.
+* **RN03 — Bloqueio de Vencidos:** O sistema avisa e não deixa vender se o produto estiver com a validade vencida.
+* **RN04 — Cancelamento com Gerente:** Se o cupom já saiu, o operador só cancela se o gerente colocar a senha dele (limite de 15 minutos).
+* **RN05 — Alerta de Reposição:** Quando o estoque de um item chegar a 5 unidades, o sistema manda um aviso visual pro pessoal pedir mais.
 ---
 
 ## 3. Requisitos Funcionais (RF)
-* **RF01:** O sistema deve permitir o cadastro de medicamentos com lote e validade.
+* **RF01:** O sistema tem que cadastrar de medicamentos com lote e validade.
 * **RF02:** O sistema deve permitir a busca de produtos por nome ou código de barras.
 * **RF03:** O sistema deve permitir o cadastro de clientes utilizando o CPF como chave única.
 * **RF04:** O sistema deve realizar a baixa automática no estoque após a finalização de cada venda.
